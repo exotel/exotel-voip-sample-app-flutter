@@ -56,6 +56,7 @@ Next, the following functions are implemented in native (android):
 
     ```
     public class ExotelSDKChannel {
+        private static final String CHANNEL = "android/exotel_sdk";
         private MethodChannel channel;
         public ExotelSDKChannel(FlutterEngine flutterEngine, Context context) {
             this.flutterEngine = flutterEngine;
