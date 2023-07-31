@@ -38,6 +38,8 @@ public class ExotelSDKChannel implements VoiceAppStatusEvents,CallEvents {
         mService = new VoiceAppService(context);
         mService.addStatusEventListener(ExotelSDKChannel.this);
         mService.addCallEventListener(ExotelSDKChannel.this);
+        appHostname = "https://bellatrix.apac-sg.exotel.in/v1"; // [hard-coded]
+        accountSid = "exotel675"; // [hard-coded]
     }
     void registerMethodChannel() {
       channel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(),CHANNEL);
@@ -77,8 +79,6 @@ public class ExotelSDKChannel implements VoiceAppStatusEvents,CallEvents {
 
     private void login() {
 
-        appHostname = "bellatrix.apac-sg.exotel.in"; // [hard-coded]
-        accountSid = "exotel675"; // [hard-coded]
         username = ""; // [hard-coded]
         password = ""; // [hard-coded]
         SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.getInstance(context);
