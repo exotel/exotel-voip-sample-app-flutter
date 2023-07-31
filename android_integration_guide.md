@@ -62,26 +62,28 @@ Next, the following functions are implemented in native (android):
             this.flutterEngine = flutterEngine;
             this.context = context;
         }
-        channel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(),CHANNEL);
-        channel.setMethodCallHandler(
-                ((call, result) -> {
-                    System.out.println("Entered in Native Android");
-                    switch (call.method) {
-                        case "login":
-                            login();
-                            result.success("...");
-                            break;
-                        case "call":
-                            call();
-                            result.success("...");
-                            break;
-                        default:
-                            System.out.println("fail");
-                            result.notImplemented();
-                            break;
-                    }
-                })
-        );
+        void registerMethodChannel() {
+            channel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(),CHANNEL);
+            channel.setMethodCallHandler(
+                    ((call, result) -> {
+                        System.out.println("Entered in Native Android");
+                        switch (call.method) {
+                            case "login":
+                                login();
+                                result.success("...");
+                                break;
+                            case "call":
+                                call();
+                                result.success("...");
+                                break;
+                            default:
+                                System.out.println("fail");
+                                result.notImplemented();
+                                break;
+                        }
+                    })
+            );
+        }
 
     }
     ```
