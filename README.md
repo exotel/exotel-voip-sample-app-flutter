@@ -2,29 +2,25 @@
 
 A basic sample Flutter project based on Exotel SDK.
 
-## Getting Started
+## Prerequisites
 
-### check flutter configuartion 
+`check flutter configuartion`  
 ```
 flutter doctor
 ```
 
-### clean flutter application
+`clean flutter application`
 ```
 flutter clean
 ```
 
-### install dependencies
+`install dependencies`
 ```
 flutter pub get
 ```
 
-### upgrade dependencies
-```
-flutter pub upgrade
-```
+## How to run flutter app
 
-### run flutter app
 ```
 flutter run
 ```
