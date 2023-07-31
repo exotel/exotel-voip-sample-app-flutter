@@ -12,15 +12,12 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
 //    private static String TAG = "MainActivity";
-    FlutterEngine flutterEngine;
     private ExotelSDKChannel exotelSDKChannel;
-    private Context context;
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         System.out.println("configureFlutterEngine");
         GeneratedPluginRegistrant.registerWith(flutterEngine);
-        this.flutterEngine = flutterEngine;
 
 
         exotelSDKChannel = new ExotelSDKChannel(flutterEngine,this);

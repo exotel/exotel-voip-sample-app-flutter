@@ -64,9 +64,10 @@ public class ExotelSDKChannel implements VoiceAppStatusEvents,CallEvents {
     }
 
     private void call() {
+        String dialNumber = ""; // [hard-coded]
         SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.getInstance(context);
         String contextMessage = sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.CONTACT_DISPLAY_NAME.toString());
-        String updatedDestination = mService.getUpdatedNumberToDial(""); 
+        String updatedDestination = mService.getUpdatedNumberToDial(dialNumber);
         try {
             call = mService.dial(updatedDestination, contextMessage);
         } catch (Exception e) {
@@ -76,10 +77,10 @@ public class ExotelSDKChannel implements VoiceAppStatusEvents,CallEvents {
 
     private void login() {
 
-        appHostname = ""; 
-        accountSid = ""; 
-        username = ""; 
-        password = ""; 
+        appHostname = "bellatrix.apac-sg.exotel.in"; // [hard-coded]
+        accountSid = "exotel675"; // [hard-coded]
+        username = ""; // [hard-coded]
+        password = ""; // [hard-coded]
         SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.getInstance(context);
         sharedPreferencesHelper.putString(ApplicationSharedPreferenceData.USER_NAME.toString(),username);
         sharedPreferencesHelper.putString(ApplicationSharedPreferenceData.DISPLAY_NAME.toString(),username);
