@@ -1,6 +1,6 @@
 # exotel_voice_sample
 
-A Flutter project based on Exotel SDK.
+A basic sample Flutter project based on Exotel SDK.
 
 ## Getting Started
 
@@ -29,11 +29,41 @@ flutter pub upgrade
 flutter run
 ```
 
-
 ## Limitations
 
-### Ask permission code is not added yet
-**workaround** : please enable all the permission from app settings.
+- as of now, sample UI only support login and calling .
+
+- *Credentials are hard coded*
+
+     **workaround** : please add credential in ExotelSDKChannel class of android project.
+     ```
+     public class ExotelSDKChannel {
+         private void login() {
+            ...
+            username = "<username>"; // [hard-coded]
+            password = "<password>"; // [hard-coded]
+            ...
+         }
+     }
+     ```
+     To get the credential, please connect with exotel team.
+
+- *Dial Number are hard coded*
+
+     **workaround** : please add dial number in ExotelSDKChannel class of android project.
+     ```
+     public class ExotelSDKChannel {
+         private void call() {
+            String dialNumber = ""; // [hard-coded]
+            ...
+         }
+     }
+     ```
+
+- *Ask permission code is not added yet*
+
+    **workaround** : after app is installed, please enable all the permission(microphone , Phone, Notifications) from applicaions settings .
+
 
 
 ## How to integrate exotel android SDK to flutter 
