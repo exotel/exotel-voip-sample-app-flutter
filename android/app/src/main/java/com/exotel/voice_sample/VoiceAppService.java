@@ -167,7 +167,7 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
     /**
      * mediator API for dialing
      * @param destination exophone number
-     * @param message destination number
+     * @param message
      * @return
      * @throws Exception
      */
@@ -179,7 +179,7 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
     /**
      * mediator API to invoke dial of exotel client
      * @param destination exophone number
-     * @param message   destination number
+     * @param message
      * @return
      * @throws Exception
      */
@@ -199,7 +199,7 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
             }*/
             /**
              * [sdk-calling-flow] invoking dial API of exotel client API
-             * with exophone and destionation number
+             * with exophone 
              */
             call = callController.dial(destination,message);
 
