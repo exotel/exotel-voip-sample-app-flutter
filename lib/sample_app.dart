@@ -52,7 +52,7 @@ class _SampleAppState extends State<SampleApp> {
   void logInButton() async{
     String response = "";
     try {
-      // send message from flutter to android for exotel client SDK initialization
+      // [sdk-initialization-flow] send message from flutter to android for exotel client SDK initialization
       final String value = await androidChannel.invokeMethod('login');
       response = value;
     } catch (e) {
@@ -67,7 +67,7 @@ class _SampleAppState extends State<SampleApp> {
   void callButtonPressed() async {
     String response = "";
     try {
-      // send message from flutter to android for calling through exotel SDK
+      // [sdk-calling-flow] send message from flutter to android for calling through exotel SDK
       final String value = await androidChannel.invokeMethod('call');
       response = value;
     } catch (e) {
