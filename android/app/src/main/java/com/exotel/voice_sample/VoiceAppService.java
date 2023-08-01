@@ -76,6 +76,7 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
 
     private VoiceAppStatus voiceAppStatus = new VoiceAppStatus();
     private Context context;
+    private CallContextEvents callContextListener;
 
 
     public VoiceAppService(Context context) {
@@ -199,7 +200,7 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
             }*/
             /**
              * [sdk-calling-flow] invoking dial API of exotel client API
-             * with exophone 
+             * with exophone
              */
             call = callController.dial(destination,message);
 
@@ -755,6 +756,84 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
         }
         SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.getInstance(context);
         return sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.EXOPHONE.toString());
+    }
+
+
+    public void setCallContextListener(CallContextEvents callContextListener) {
+        this.callContextListener = callContextListener;
+    }
+    public void setCallContext(String userId, String destination, String message) {
+        JSONObject jsonObject = new JSONObject();
+        OkHttpClient client = new OkHttpClient();
+
+        SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.getInstance(context);
+        String url = sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.APP_HOSTNAME.toString());
+        String accountSid = sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.ACCOUNT_SID.toString());
+        url = url + "/accounts/" + accountSid + "/subscribers/" + userId + "/context";
+        destination = "sip:" + destination;
+
+        VoiceAppLogger.debug(TAG, "setCallContext URL is: " + url);
+        VoiceAppLogger.debug(TAG, "setCallContext Destination is: " + destination);
+        VoiceAppLogger.debug(TAG, "setCallContext userID is: " + userId);
+        VoiceAppLogger.debug(TAG, "setCallContext message is: " + message);
+        try {
+            jsonObject.put("dialToNumber", destination);
+            jsonObject.put("message", message);
+        } catch (JSONException e) {
+            VoiceAppLogger.error(TAG, "Error in creating device token body");
+            return;
+        }
+
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                VoiceAppLogger.error(TAG, "setCallContext: Failed to get response"
+                        + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, Response response) throws IOException {
+                VoiceAppLogger.debug(TAG, "setCallContext: Got response for setCallContext: " + response.code());
+
+
+            }
+        });
+    }
+
+    public void removeCallContext(String userId) {
+        OkHttpClient client = new OkHttpClient();
+        SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.getInstance(context);
+        String url = sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.APP_HOSTNAME.toString());
+        String accountSid = sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.ACCOUNT_SID.toString());
+        url = url + "/accounts/" + accountSid + "/subscribers/" + userId + "/context";
+        VoiceAppLogger.debug(TAG, "Remove call context URL is: " + url);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .delete()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                VoiceAppLogger.error(TAG, "removeCallContext: Failed to get response"
+                        + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, Response response) throws IOException {
+                VoiceAppLogger.debug(TAG, "removeCallContext: Got response for removeCallContext: " + response.code());
+
+            }
+        });
+
     }
 
 }
