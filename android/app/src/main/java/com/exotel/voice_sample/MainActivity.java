@@ -10,8 +10,9 @@ import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
+// This is the First Class which invoked by flutter
 public class MainActivity extends FlutterActivity {
-//    private static String TAG = "MainActivity";
+    //    private static String TAG = "MainActivity";
     private ExotelSDKChannel exotelSDKChannel;
 
     @Override

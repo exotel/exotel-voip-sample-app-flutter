@@ -15,10 +15,12 @@ class SampleApp extends StatefulWidget {
 class _SampleAppState extends State<SampleApp> {
   String userStatus = "user status";
   String callStatus = "call status";
+  // Method Channel for communication between android and flutter
   static const androidChannel = MethodChannel('android/exotel_sdk');
   @override
   void initState() {
     super.initState();
+    // handle messages from android to flutter
     androidChannel.setMethodCallHandler(flutterCallHandler);
   }
 
@@ -50,6 +52,7 @@ class _SampleAppState extends State<SampleApp> {
   void logInButton() async{
     String response = "";
     try {
+      // send message from flutter to android for exotel client SDK initialization
       final String value = await androidChannel.invokeMethod('login');
       response = value;
     } catch (e) {
@@ -64,6 +67,7 @@ class _SampleAppState extends State<SampleApp> {
   void callButtonPressed() async {
     String response = "";
     try {
+      // send message from flutter to android for calling through exotel SDK
       final String value = await androidChannel.invokeMethod('call');
       response = value;
     } catch (e) {
