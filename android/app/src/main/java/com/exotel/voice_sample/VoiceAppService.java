@@ -749,6 +749,11 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
         }
     };
 
+    /**
+     * get the exophone number
+     * @param destination
+     * @return
+     */
     public String getUpdatedNumberToDial(String destination) {
         if (null == destination) {
             VoiceAppLogger.error(TAG, "getUpdatedNumberToDial: Invalid number passed");
@@ -762,6 +767,13 @@ public class VoiceAppService implements ExotelVoiceClientEventListener, CallList
     public void setCallContextListener(CallContextEvents callContextListener) {
         this.callContextListener = callContextListener;
     }
+
+    /**
+     * call conext will be set in bellatrix endpoint.
+     * @param userId
+     * @param destination
+     * @param message
+     */
     public void setCallContext(String userId, String destination, String message) {
         JSONObject jsonObject = new JSONObject();
         OkHttpClient client = new OkHttpClient();

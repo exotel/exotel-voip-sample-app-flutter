@@ -90,11 +90,18 @@ public class ExotelSDKChannel implements VoiceAppStatusEvents,CallEvents {
         String contextMessage = sharedPreferencesHelper.getString(ApplicationSharedPreferenceData.CONTACT_DISPLAY_NAME.toString());
         String updatedDestination = mService.getUpdatedNumberToDial(dialNumber);
         try {
+            /**
+             * [sdk-calling-flow] calling mediator dial api
+             * with exphone number as updatedDestination
+             */
             call = mService.dial(updatedDestination, contextMessage);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         if(null != call){
+            /**
+             * [sdk-calling-flow] setting dialNumber in call context
+             */
             mService.setCallContext(username,dialNumber,"");
         }
     }
